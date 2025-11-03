@@ -4,6 +4,9 @@ shopt -s inherit_errexit
 
 log() { echo >&2 "[$(basename "$0")] $*"; }
 
+log "Checking release is triggered from the correct branch..."
+./scripts/git-assert-branch master
+
 log "Checking for local changes..."
 ./scripts/git-assert-clean
 
