@@ -19,4 +19,4 @@ jobs:
         node-version: 24.11.0
 
     - run: yarn install --immutable
-    - run: yarn lint
+    - run: yarn test
