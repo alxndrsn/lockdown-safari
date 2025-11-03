@@ -1,0 +1,33 @@
+#!/bin/bash -eu
+
+log() { echo >&2 "[$(basename "$0")] $*"; }
+
+srcUrl=https://developer.mozilla.org/en-US/docs/Web/API
+targetFile=src/experimental-apis.json
+
+log "Scraping experimental API list"
+log "  From: $srcUrl"
+log "  To:   $targetFile"
+
+curl "$srcUrl" |
+    sed -n '/id="interfaces"/,/<\/section>/p' |
+    tr -d '\n' |
+    awk '
+      BEGIN {
+        RS="</li>"; # Set record separator to closing tag
+      }
+      {
+        if($0 ~ /<li>/) { # line contains the opening tag
+          # remove up to and including opening tag
+          sub(/.*<li>/, ""); 
+          print $0; # Print remaining content
+        }
+      }
+    ' |
+    grep experimental |
+    grep -o '<code>.*</code>' |
+    sed -e 's_<code>__' -e 's_</code>__' |
+    jq -R |
+    jq -s >"$targetFile"
+  
+log "Completed OK."
