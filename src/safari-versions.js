@@ -156,6 +156,7 @@ const v17 = {
       'FileReader',
       'FileReaderSync',
     ],
+    // This API seems to have been previously disabled in 16.4.  Keeping here as the WebKit blog mentions it specifically for this version.
     'Web Speech API': [ // https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API
       'SpeechGrammar',
       'Deprecated',
@@ -175,6 +176,7 @@ const v17 = {
       'SpeechSynthesisUtterance',
       'SpeechSynthesisVoice',
     ],
+    // This API seems to have been previously disabled in 16.4.  Keeping here as the WebKit blog mentions it specifically for this version.
     'Web Locks API': [ // https://developer.mozilla.org/en-US/docs/Web/API/Web_Locks_API
       'Lock',
       'LockManager',
