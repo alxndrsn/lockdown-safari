@@ -21,7 +21,7 @@ async function launchLockdownBrowser() {
   log('Using webkit at:', webkitPath);
 
   const { userAgent, deviceScaleFactor, isMobile, viewport } = devices[options.device];
-  const { undefinedGlobals, webkitFeatures, webkitFlags } = safariVersions[options.safari];
+  const { allowWebFonts, undefinedGlobals, webkitFeatures, webkitFlags } = safariVersions[options.safari];
 
   const browser = await webkit.launch({
     headless: false,
@@ -74,7 +74,7 @@ async function launchLockdownBrowser() {
 
     let allow = true;
 
-    if(resourceType === 'font') allow = false;
+    if(resourceType === 'font' && !allowWebFonts) allow = false;
 
     log(allow ? 'Allowing' : 'Blocking', 'resourceType:', resourceType, 'from:', url);
     if(allow) route.continue();
