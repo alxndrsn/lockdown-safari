@@ -19,8 +19,8 @@ TODO!
 
 ## Safari
 
-* ✅ 26.0 (current target)
-* ☑️ 17.0
+* ☑️ 26.0
+* ✅ 17.0 (current target)
 * ☑️ 16.5
 * ☑️ 16.4
 

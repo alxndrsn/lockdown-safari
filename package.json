@@ -2,8 +2,14 @@
   "name": "lockdown-safari",
   "version": "0.1.0",
   "packageManager": "yarn@4.9.2",
+  "bin": {
+    "lockdown-safari": "src/index.js"
+  },
   "volta": {
     "node": "24.11.0",
     "yarn": "4.10.3"
+  },
+  "dependencies": {
+    "playwright": "^1.56.1"
   }
 }

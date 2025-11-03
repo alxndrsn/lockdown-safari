@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <title>iOS Safari Feature Tester</title>
+    <style>
+      body { font-family:sans-serif }
+      #container { max-width:768px; margin-left:auto; margin-right:auto }
+
+      .loaded #loader { display:none }
+      #content { display:none; margin-left:auto; margin-right:auto }
+      .loaded #content { display:block }
+
+      table { border-collapse:collapse; margin-left:auto; margin-right:auto }
+      thead { font-weight:bold }
+      tbody { font-family:monospace }
+      td { padding:4px; border:solid #ccc 1px }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="loader"><h2>Loading...</h2></div>
+      <div id="content">
+        <table>
+          <thead>
+            <td>Feature</td><td>Global</td><td>Type</td>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      const possibleGlobals = {
+        WASM: [
+          'WebAssembly',
+        ],
+        WebGL: [
+          'WebGLRenderingContext',
+          'WebGL2RenderingContext',
+          'WebGLActiveInfo',
+          'WebGLBuffer',
+          'WebGLContextEvent',
+          'WebGLFramebuffer',
+          'WebGLProgram',
+          'WebGLQuery',
+          'WebGLRenderbuffer',
+          'WebGLSampler',
+          'WebGLShader',
+          'WebGLShaderPrecisionFormat',
+          'WebGLSync',
+          'WebGLTexture',
+          'WebGLTransformFeedback',
+          'WebGLUniformLocation',
+        ],
+      };
+
+      const $tbody = document.querySelector('tbody');
+      for(const [ feature, props ] of Object.entries(possibleGlobals)) {
+        for(const prop of props) {
+          const $row = $tbody.insertRow();
+          const addCell = txt => {
+            const $cell = $row.insertCell();
+            $cell.textContent = txt;
+          }
+          addCell(feature);
+          addCell(`window.${prop}`);
+          addCell(typeof window[prop]);
+        }
+      }
+
+      document.getElementById('container').classList.add('loaded');
+    </script>
+  </body>
+</html>
