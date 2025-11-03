@@ -13,9 +13,27 @@ log "Checking for local changes..."
 log "Checking all changes are already pushed..."
 ./scripts/git-assert-pushed
 
-newVersion="$(jq -r .version package.json)"
+currentVersion="$(jq -r .version package.json)"
+log "Previous version: $currentVersion"
 
+IFS='.' read -r major minor patch <<<"$currentVersion"
+suggestion="$major.$minor.$((patch + 1))"
+read -r -p "Enter new version ($suggestion): " userVersion
+newVersion="${userVersion:-$suggestion}"
+log "     New version: $newVersion"
+
+log "Updating package.json..."
+tmp="$(mktemp)"
+jq ".version = \"$newVersion\"" <package.json >"$tmp"
+mv "$tmp" package.json
+
+log "Committing to git..."
 tag="v$newVersion"
+git commit -m"Release: $tag"
+
+log "Pushing to remote..."
+git push
+
 log "Tagging: $tag ..."
 git tag "$tag"
 
