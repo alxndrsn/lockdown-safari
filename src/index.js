@@ -54,18 +54,22 @@ async function launchLockdownBrowser() {
     }
   });
 
-  page.addInitScript(() => {
-    const log = (...args) => console.log('[lockdown.init]', ...args);
+  page.addInitScript(({ undefinedGlobals }) => {
+    try {
+      const log = (...args) => console.log('[lockdown.init]', ...args);
 
-    log('Applying Lockdown Mode javascript simulation...');
+      log('Applying Lockdown Mode javascript simulation...');
 
-    for(const [ feature, props ] of Object.entries(undefinedGlobals)) {
-      log(`Disabling ${feature}...`);
-      for(const prop of props) delete window[prop];
+      for(const [ feature, props ] of Object.entries(undefinedGlobals)) {
+        log(`Disabling ${feature}...`);
+        for(const prop of props) delete window[prop];
+      }
+
+      log('Completed.');
+    } catch(err) {
+      console.error(err);
     }
-
-    log('Completed.');
-  });
+  }, { undefinedGlobals });
 
   // Apply network restrictions
   await page.route('**', route => {
