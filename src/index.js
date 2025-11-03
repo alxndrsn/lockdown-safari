@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-
-const { execSync } = require('node:child_process');
-
 const { program, Option } = require('commander');
 const { webkit } = require('playwright');
 

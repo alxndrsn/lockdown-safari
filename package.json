@@ -11,5 +11,8 @@
   "dependencies": {
     "commander": "^14.0.2",
     "playwright": "^1.56.1"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.0"
   }
 }
