@@ -1,0 +1,46 @@
+#!/bin/bash -eu
+set -o pipefail
+shopt -s inherit_errexit
+
+log() { echo >&2 "[$(basename "$0")] $*"; }
+
+log "Checking release is triggered from the correct branch..."
+./scripts/git-assert-branch master
+
+log "Checking for local changes..."
+./scripts/git-assert-clean
+
+log "Checking all changes are already pushed..."
+./scripts/git-assert-pushed
+
+currentVersion="$(jq -r .version package.json)"
+log "Previous version: $currentVersion"
+
+IFS='.' read -r major minor patch <<<"$currentVersion"
+suggestion="$major.$minor.$((patch + 1))"
+read -r -p "Enter new version ($suggestion): " userVersion
+newVersion="${userVersion:-$suggestion}"
+log "     New version: $newVersion"
+
+log "Updating package.json..."
+tmp="$(mktemp)"
+jq ".version = \"$newVersion\"" <package.json >"$tmp"
+mv "$tmp" package.json
+
+log "Committing to git..."
+tag="v$newVersion"
+git commit -m"Release: $tag"
+
+log "Pushing to remote..."
+git push
+
+log "Tagging: $tag ..."
+git tag "$tag"
+
+log "Pushing tag..."
+git push --tags
+
+log "Publishing to npm..."
+npm publish
+
+log "Everything completed OK."
