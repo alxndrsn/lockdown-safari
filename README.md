@@ -21,8 +21,8 @@ TODO!
 
 * ✅ 26.0
 * ✅ 17.0 (default)
-* ☑️ 16.5
-* ☑️ 16.4
+* ✅ 16.5
+* ✅ 16.4
 
 ## Operating Systems
 
