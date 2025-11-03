@@ -1,0 +1,25 @@
+#!/bin/bash -eu
+set -o pipefail
+shopt -s inherit_errexit
+
+log() { echo >&2 "[$(basename "$0")] $*"; }
+
+log "Checking for local changes..."
+./scripts/git-assert-clean
+
+log "Checking all changes are already pushed..."
+./scripts/git-assert-pushed
+
+newVersion="$(jq -r .version package.json)"
+
+tag="v$newVersion"
+log "Tagging: $tag ..."
+git tag "$tag"
+
+log "Pushing tag..."
+git push --tags
+
+log "Publishing to npm..."
+npm publish
+
+log "Everything completed OK."
