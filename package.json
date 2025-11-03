@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "packageManager": "yarn@4.9.2",
   "repository": "github:alxndrsn/lockdown-safari",
-  "bin": {
-    "lockdown-safari": "src/index.js"
-  },
+  "bin": "src/index.js",
   "volta": {
     "node": "24.11.0",
     "yarn": "4.10.3"
