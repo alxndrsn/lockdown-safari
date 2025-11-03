@@ -5,7 +5,8 @@
   "repository": "github:alxndrsn/lockdown-safari",
   "bin": "src/index.js",
   "scripts": {
-    "lint": "./scripts/eslint"
+    "lint": "yarn scriptcheck && ./scripts/eslint",
+    "scriptcheck": "./scripts/scriptcheck ./scripts"
   },
   "volta": {
     "node": "24.11.0",
