@@ -6,7 +6,9 @@
   "bin": "src/index.js",
   "scripts": {
     "lint": "yarn scriptcheck && ./scripts/eslint",
-    "scriptcheck": "./scripts/scriptcheck ./scripts"
+    "scriptcheck": "./scripts/scriptcheck ./scripts",
+    "test": "yarn lint && yarn test:mocha",
+    "test:mocha": "mocha ./test/**/*.spec.js"
   },
   "volta": {
     "node": "24.11.0",
@@ -17,6 +19,8 @@
     "playwright": "^1.56.1"
   },
   "devDependencies": {
-    "eslint": "^9.39.0"
+    "chai": "^6.2.0",
+    "eslint": "^9.39.0",
+    "mocha": "^11.7.4"
   }
 }
