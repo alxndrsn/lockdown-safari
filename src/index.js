@@ -2,6 +2,7 @@
 
 const { execSync } = require('node:child_process');
 
+const { program, Option } = require('commander');
 const { webkit } = require('playwright');
 
 const devices = require('./devices');
@@ -9,12 +10,21 @@ const safariVersions = require('./safari-versions');
 
 const log = (...args) => console.error(`[${new Date().toISOString()}]`, '[lockdown-safari]', ...args);
 
+program
+    .addOption(new Option('-d, --device <device>',  'Select a device', 'iPhone13mini').choices(Object.keys(devices)))
+    .addOption(new Option('-s, --safari <version>', 'Select Safari version', '17')    .choices(Object.keys(safariVersions)))
+    .parse();
+const options = program.opts();
+
+log('Device:',         options.device);
+log('Safari Version:', options.safari);
+
 async function launchLockdownBrowser() {
   const webkitPath = webkit.executablePath();
   log('Using webkit at:', webkitPath);
 
-  const { userAgent, deviceScaleFactor, isMobile, viewport } = devices['iPhone13mini'];
-  const { undefinedGlobals, webkitFeatures, webkitFlags } = safariVersions['17'];
+  const { userAgent, deviceScaleFactor, isMobile, viewport } = devices[options.device];
+  const { undefinedGlobals, webkitFeatures, webkitFlags } = safariVersions[options.safari];
 
   const browser = await webkit.launch({
     headless: false,
