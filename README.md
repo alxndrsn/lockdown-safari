@@ -1,7 +1,7 @@
 Lockdown Safari
 ===============
 
-Simulate Safari's Lockdown Mode with [Playwright][https://playwright.dev/] & [WebKit](https://webkit.org/).
+Simulate Safari's Lockdown Mode with [Playwright](https://playwright.dev/) & [WebKit](https://webkit.org/).
 
 # Use
 
