@@ -10,8 +10,9 @@
 // For retrospective reconstruction, check commit date for each version of this file.
 const experimentalApis = require('./experimental-apis');
 
-const v16 = { // TODO this is a rough estimate
+const base = { // TODO this is a rough estimate
   undefinedGlobals: {
+    // TODO find which version of Safari these were disabled in:
     WASM: [
       'WebAssembly',
     ],
@@ -57,11 +58,60 @@ const v16 = { // TODO this is a rough estimate
   ],
 };
 
+// See: https://webkit.org/blog/13966/webkit-features-in-safari-16-4/#new-restrictions-in-lockdown-mode
+// TODO: "Disable binary fonts in the CSS Font Loading API"
+// TODO: "Disable SVG fonts"
+const v16_4 = {
+  ...base,
+  undefinedGlobals: {
+    ...base.undefinedGlobals,
+    'Service Worker API': [ // https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API
+      'Cache',
+      'CacheStorage',
+      'Client',
+      'Clients',
+      'ExtendableEvent',
+      'ExtendableMessageEvent',
+      'FetchEvent',
+      'InstallEvent',
+      'NavigationPreloadManager',
+      'ServiceWorker',
+      'ServiceWorkerContainer',
+      'ServiceWorkerGlobalScope',
+      'ServiceWorkerRegistration',
+      'WindowClient',
+    ],
+    'Web Locks API': [ // https://developer.mozilla.org/en-US/docs/Web/API/Web_Locks_API
+      'Lock',
+      'LockManager',
+    ],
+    'Web Speech API': [ // https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API
+      'SpeechGrammar',
+      'Deprecated',
+      'SpeechGrammarList',
+      'Deprecated',
+      'SpeechRecognition',
+      'SpeechRecognitionAlternative',
+      'SpeechRecognitionErrorEvent',
+      'SpeechRecognitionEvent',
+      'SpeechRecognitionPhrase',
+      'Experimental',
+      'SpeechRecognitionResult',
+      'SpeechRecognitionResultList',
+      'SpeechSynthesis',
+      'SpeechSynthesisErrorEvent',
+      'SpeechSynthesisEvent',
+      'SpeechSynthesisUtterance',
+      'SpeechSynthesisVoice',
+    ],
+  },
+};
+
 // See: https://webkit.org/blog/14154/webkit-features-in-safari-16-5/#:~:text=Lockdown%20mode
 const v16_5 = {
-  ...v16,
+  ...v16_4,
   undefinedGlobals: {
-    ...v16.undefinedGlobals,
+    ...v16_4.undefinedGlobals,
     'WebCodecs API': [ // https://developer.mozilla.org/en-US/docs/Web/API/WebCodecs_API
       'AudioData',
       'AudioDecoder',
