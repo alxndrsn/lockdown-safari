@@ -6,51 +6,59 @@
 // * https://webkit.org/blog/14445/webkit-features-in-safari-17-0/#:~:text=Lockdown%20mode
 // * https://webkit.org/blog/17333/webkit-features-in-safari-26-0/#lockdown-mode
 
-module.exports = {
-  17: {
-    undefinedGlobals: {
-      WASM: [
-        'WebAssembly',
-      ],
-      WebGL: [
-        'WebGLRenderingContext',
-        'WebGL2RenderingContext',
-        'WebGLActiveInfo',
-        'WebGLBuffer',
-        'WebGLContextEvent',
-        'WebGLFramebuffer',
-        'WebGLProgram',
-        'WebGLQuery',
-        'WebGLRenderbuffer',
-        'WebGLSampler',
-        'WebGLShader',
-        'WebGLShaderPrecisionFormat',
-        'WebGLSync',
-        'WebGLTexture',
-        'WebGLTransformFeedback',
-        'WebGLUniformLocation',
-      ],
-    },
-    webkitFeatures: [
-      '-AllowContentSecurityPolicySourceStarToMatchAnyProtocol',
-      '-AllowFileAccessFromFileURLs',
-      '-AllowUniversalAccessFromFileURLs',
-      '+CrossOriginEmbedderPolicy',
-      '+CrossOriginOpenerPolicy',
-      '-CSSSelectorJITCompiler',
-      '+DeveloperExtras',
-      '+ForceWebGLUsesLowPower',
-      '-JavaScriptCanAccessClipboard',
-      '-JavaScriptCanOpenWindowsAutomatically',
-      '-LinkPreconnect',
-      '-LinkPreload',
-      '-WebAudio',
+const v17 = {
+  undefinedGlobals: {
+    WASM: [
+      'WebAssembly',
     ],
-    webkitFlags: [
-      '--enable-developer-extras=true',
-      '--enable-javascript-markup=false',
-      '--enable-webaudio=false',
-      '--enable-webgl=false',
+    WebGL: [
+      'WebGLRenderingContext',
+      'WebGL2RenderingContext',
+      'WebGLActiveInfo',
+      'WebGLBuffer',
+      'WebGLContextEvent',
+      'WebGLFramebuffer',
+      'WebGLProgram',
+      'WebGLQuery',
+      'WebGLRenderbuffer',
+      'WebGLSampler',
+      'WebGLShader',
+      'WebGLShaderPrecisionFormat',
+      'WebGLSync',
+      'WebGLTexture',
+      'WebGLTransformFeedback',
+      'WebGLUniformLocation',
     ],
   },
+  webkitFeatures: [
+    '-AllowContentSecurityPolicySourceStarToMatchAnyProtocol',
+    '-AllowFileAccessFromFileURLs',
+    '-AllowUniversalAccessFromFileURLs',
+    '+CrossOriginEmbedderPolicy',
+    '+CrossOriginOpenerPolicy',
+    '-CSSSelectorJITCompiler',
+    '+DeveloperExtras',
+    '+ForceWebGLUsesLowPower',
+    '-JavaScriptCanAccessClipboard',
+    '-JavaScriptCanOpenWindowsAutomatically',
+    '-LinkPreconnect',
+    '-LinkPreload',
+    '-WebAudio',
+  ],
+  webkitFlags: [
+    '--enable-developer-extras=true',
+    '--enable-javascript-markup=false',
+    '--enable-webaudio=false',
+    '--enable-webgl=false',
+  ],
+};
+
+const v26 = {
+  ...v17,
+  allowWebFonts: true,
+};
+
+module.exports = {
+  17: v17,
+  26: v26,
 };
