@@ -57,13 +57,35 @@ const v16 = { // TODO this is a rough estimate
   ],
 };
 
+// See: https://webkit.org/blog/14154/webkit-features-in-safari-16-5/#:~:text=Lockdown%20mode
+const v16_5 = {
+  ...v16,
+  undefinedGlobals: {
+    ...v16.undefinedGlobals,
+    'WebCodecs API': [ // https://developer.mozilla.org/en-US/docs/Web/API/WebCodecs_API
+      'AudioData',
+      'AudioDecoder',
+      'AudioEncoder',
+      'EncodedAudioChunk',
+      'EncodedVideoChunk',
+      'ImageDecoder',
+      'ImageTrack',
+      'ImageTrackList',
+      'VideoDecoder',
+      'VideoEncoder',
+      'VideoColorSpace',
+      'VideoFrame',
+    ],
+  },
+};
+
 // TODO Disable support for the <embed> element.
 // TODO Support "select web fonts."
 // See: https://webkit.org/blog/14445/webkit-features-in-safari-17-0/#:~:text=Lockdown%20mode
 const v17 = {
-  ...v16,
+  ...v16_5,
   undefinedGlobals: {
-    ...v16.undefinedGlobals,
+    ...v16_5.undefinedGlobals,
     IndexedDB: [ // https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API
       'IDBCursor',
       'IDBCursorWithValue',
@@ -120,6 +142,7 @@ const v26 = {
 };
 
 module.exports = {
-  17: v17,
-  26: v26,
+  '16.5': v16_5,
+  '17':   v17,
+  '26':   v26,
 };
