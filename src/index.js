@@ -8,7 +8,7 @@ const safariVersions = require('./safari-versions');
 const log = (...args) => console.error(`[${new Date().toISOString()}]`, '[lockdown-safari]', ...args);
 
 program
-    .addOption(new Option('-d, --device <device>',  'Select a device')      .choices(Object.keys(devices)).default('iPhone13mini'))
+    .addOption(new Option('-d, --device <device>',  'Select a device')      .choices(Object.keys(devices))       .default('iPhone13mini'))
     .addOption(new Option('-s, --safari <version>', 'Select Safari version').choices(Object.keys(safariVersions)).default('17'))
     .parse();
 const options = program.opts();
