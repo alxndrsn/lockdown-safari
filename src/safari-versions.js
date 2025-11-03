@@ -76,6 +76,7 @@ const v16_5 = {
       'VideoColorSpace',
       'VideoFrame',
     ],
+  },
 };
 
 // TODO Disable support for the <embed> element.
