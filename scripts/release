@@ -29,6 +29,7 @@ mv "$tmp" package.json
 
 log "Committing to git..."
 tag="v$newVersion"
+git add package.json
 git commit -m"Release: $tag"
 
 log "Pushing to remote..."
