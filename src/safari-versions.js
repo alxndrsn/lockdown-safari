@@ -107,7 +107,7 @@ const v17 = {
       'Lock',
       'LockManager',
     ],
-    'Experimental APIs': ...experimentalApis,
+    'Experimental APIs': experimentalApis,
 };
 
 // Only change on previous is to allow (most) web fonts.
